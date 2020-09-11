@@ -33,7 +33,7 @@ Add this to your HTML page:
 </script>
 ```
 
-## NPM
+### NPM
 
 Install [drkmd.js](https://github.com/BetaHuhn/drkmd.js) using NPM
 
