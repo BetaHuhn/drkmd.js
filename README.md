@@ -6,7 +6,9 @@
 
 [![Build](https://github.com/BetaHuhn/drkmd.js/workflows/Build/badge.svg)](https://github.com/BetaHuhn/drkmd.js/actions?query=workflow%3ABuild) ![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg) ![David](https://img.shields.io/david/betahuhn/drkmd.js) ![GitHub package.json version](https://img.shields.io/github/package-json/v/betahuhn/drkmd.js)
 
-Simple dark-mode/light-mode logic for any website.
+Simple dark-mode/light-mode logic for any website
+
+[🔮 Live Demo](https://codepen.io/BetaHuhn/pen/oNxdBzK)
 <br/>
 
 </div>
@@ -90,6 +92,25 @@ window.addEventListener('theme', e => {
 
 ```
 
+## 🛠️ Manuall usage
+
+If you don't want to show the button and enable/disable Darkmode programatically you can use the method `toggle()`:
+
+```javascript
+const darkmode = new Darkmode();
+darkmode.toggle();
+```
+
+There are also other methods available:
+
+```js
+darkmode.attach() //Create default darkmode button
+darkmode.toggle() // Toggle theme
+darkmode.isActivated() // If darkmode is active
+darkmode.toLight() // Change theme to light
+darkmode.toDark() // Change theme to dark
+```
+
 ## ⚙️ Options
 
 You can customize [drkmd.js](https://github.com/BetaHuhn/drkmd.js) by passing a options object to `new Darkmode()`:
@@ -111,25 +132,6 @@ const options = {
 
 const darkmode = new Darkmode(options);
 darkmode.attach();
-```
-
-## 🛠️ Manuall usage
-
-If you don't want to show the button and enable/disable Darkmode programatically you can use the method `toggle()`:
-
-```javascript
-const darkmode = new Darkmode();
-darkmode.toggle();
-```
-
-There are also other methods available:
-
-```js
-darkmode.attach() //Create default darkmode button
-darkmode.toggle() // Toggle theme
-darkmode.isActivated() // If darkmode is active
-darkmode.toLight() // Change theme to light
-darkmode.toDark() // Change theme to dark
 ```
 
 ## 🌍 Browser compatibility
