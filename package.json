@@ -1,0 +1,26 @@
+{
+  "name": "darkmode",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/darkmode.min.js",
+  "scripts": {
+    "build": "node build.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BetaHuhn/darkmode.git"
+  },
+  "author": "Maximilian Schiller <schiller@mxis.ch>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BetaHuhn/darkmode/issues"
+  },
+  "homepage": "https://github.com/BetaHuhn/darkmode#readme",
+  "files": [
+    "dist",
+    "src"
+  ],
+  "devDependencies": {
+    "rosid-handler-js": "^13.0.0"
+  }
+}
