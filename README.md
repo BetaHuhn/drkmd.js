@@ -75,6 +75,21 @@ body {
 }
 ```
 
+### Events
+
+By default [drkmd.js](https://github.com/BetaHuhn/drkmd.js) emits a `theme` event if the theme changes:
+
+```js
+import Darkmode from 'drkmd-js';
+
+new Darkmode();
+
+window.addEventListener('theme', e => {
+    console.log(e.detail.to); // will return 'light' or 'dark'
+});
+
+```
+
 ## ⚙️ Options
 
 You can customize [drkmd.js](https://github.com/BetaHuhn/drkmd.js) by passing a options object to `new Darkmode()`:
@@ -87,6 +102,7 @@ const options = {
   left: '32px', // default: 'unset'
   buttonLight: '#fff',  // default: '#fff'
   buttonDark: '#000', // default: '#000'
+  events: false, // default: true
   cookie: true, // default: false
   localStorage: false, // default: true (will take precedence over cookie)
   label: '', // default: '🌓'
@@ -99,12 +115,21 @@ darkmode.attach();
 
 ## 🛠️ Manuall usage
 
-If you don't want to show the button and enable/disable Darkmode programatically you can use the method `toggle()`. You can also check if the Dark Mode is activated with the method `isActivated()`. See them in action in the following example:
+If you don't want to show the button and enable/disable Darkmode programatically you can use the method `toggle()`:
 
 ```javascript
 const darkmode = new Darkmode();
 darkmode.toggle();
-console.log(darkmode.isActivated()) // will return true
+```
+
+There are also other methods available:
+
+```js
+darkmode.attach() //Create default darkmode button
+darkmode.toggle() // Toggle theme
+darkmode.isActivated() // If darkmode is active
+darkmode.toLight() // Change theme to light
+darkmode.toDark() // Change theme to dark
 ```
 
 ## 🌍 Browser compatibility
