@@ -14,6 +14,7 @@ export default class Darkmode {
             left: 'unset',
             buttonLight: '#fff',
             buttonDark: '#000',
+            events: true,
             cookie: false,
             localStorage: true,
             label: '🌓',
@@ -88,6 +89,7 @@ export default class Darkmode {
     }
 
     toLight(){
+        if(this.options.events) window.dispatchEvent(new CustomEvent('theme', { detail: { to: 'light' } }));
         document.documentElement.setAttribute('data-theme', 'light');
         this.options.localStorage ? localStorage.setItem('darkmode', false) : this.options.cookie ? this.setCookie(false) : ""
         document.body.classList.remove('theme-dark');
@@ -96,6 +98,7 @@ export default class Darkmode {
     }
 
     toDark(){
+        if(this.options.events) window.dispatchEvent(new CustomEvent('theme', { detail: { to: 'dark' } }));
         document.documentElement.setAttribute('data-theme', 'dark');
         this.options.localStorage ? localStorage.setItem('darkmode', true) : this.options.cookie ? this.setCookie(true) : ""
         document.body.classList.add('theme-dark');
