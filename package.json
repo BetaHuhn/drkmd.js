@@ -1,21 +1,21 @@
 {
-  "name": "darkmode",
+  "name": "drkmd.js",
   "version": "0.0.1",
   "description": "",
-  "main": "dist/darkmode.min.js",
+  "main": "dist/drkmd.min.js",
   "scripts": {
     "build": "node build.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/BetaHuhn/darkmode.git"
+    "url": "git+https://github.com/BetaHuhn/drkmd.js.git"
   },
   "author": "Maximilian Schiller <schiller@mxis.ch>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/BetaHuhn/darkmode/issues"
+    "url": "https://github.com/BetaHuhn/drkmd.js/issues"
   },
-  "homepage": "https://github.com/BetaHuhn/darkmode#readme",
+  "homepage": "https://github.com/BetaHuhn/drkmd.js#readme",
   "files": [
     "dist",
     "src"

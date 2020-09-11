@@ -1,17 +1,15 @@
 const { writeFile } = require('fs').promises
 const js = require('rosid-handler-js')
 
-const pkg = require('./package.json')
-
 js('src/index.js', {
 
 	optimize: true,
 	browserify: {
-		standalone: pkg.name
+		standalone: "drkmd"
 	}
 
 }).then((data) => {
 
-	return writeFile(`dist/${pkg.name}.min.js`, data)
+	return writeFile(`dist/drkmd.min.js`, data)
 
 })
