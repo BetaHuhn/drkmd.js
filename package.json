@@ -1,6 +1,6 @@
 {
   "name": "drkmd.js",
-  "version": "0.0.1",
+  "version": "0.1.2",
   "description": "",
   "main": "dist/drkmd.min.js",
   "scripts": {

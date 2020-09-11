@@ -1,55 +1,78 @@
 export const IS_BROWSER = typeof window !== 'undefined';
 
 export default class Darkmode {
-    constructor() {
+    constructor(options) {
         if (!IS_BROWSER) {
             console.warn("Detected environment without a `window` object")
             return;
         }
 
+        const defaultOptions = {
+            top: 'unset',
+            bottom: '20px',
+            right: '20px',
+            left: 'unset',
+            buttonLight: '#fff',
+            buttonDark: '#000',
+            cookie: false,
+            localStorage: true,
+            label: '🌓',
+            autoMatchOsTheme: true
+        };
+      
+        options = Object.assign({}, defaultOptions, options);
+
+        this.options = options;
         this.dark = false;
 
-        /* Attach event listeners */
-        window.matchMedia("(prefers-color-scheme: dark)").addListener(e => e.matches && this.switchThemePrefers())
-        window.matchMedia("(prefers-color-scheme: light)").addListener(e => e.matches && this.switchThemePrefers())
-        
-        const storageValue = localStorage.getItem('darkmode');
+        if(options.autoMatchOsTheme){
+            window.matchMedia("(prefers-color-scheme: dark)").addListener(e => e.matches && this.switchThemePrefers())
+            window.matchMedia("(prefers-color-scheme: light)").addListener(e => e.matches && this.switchThemePrefers())
+        }
+
+        const storageValue = options.localStorage ? localStorage.getItem('darkmode') : options.cookie ? this.getCookie() : null;
         if(storageValue !== null){
             storageValue === 'true' || storageValue === true ? this.toDark() : this.toLight();
         }else{
-            this.preferedTheme() ? this.toDark() : this.toLight();
+            options.autoMatchOsTheme && this.preferedTheme() ? this.toDark() : this.toLight();
         }
     }
 
     attach(){
         const css = `
-            .toggle-button{
+            .drkmd-toggle-button{
                 position: absolute;
-                right: 20px;
-                bottom: 20px;
+                z-index: 1000;
+                left: ${this.options.left};
+                right: ${this.options.right};
+                bottom: ${this.options.bottom};
+                top: ${this.options.top};
                 height: 3rem;
-                width: 3rem;
-                border-radius: 100%;
+                min-width: 3rem;
+                border-radius: 3rem;
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                background: #000;
+                background: ${this.options.buttonDark};
+                color: ${this.options.buttonLight};
                 cursor: pointer;
             }
 
-            .toggle-button span{
+            .drkmd-toggle-button span{
                 margin: 0;
+                padding: 0px 10px;
             }
 
-            .theme-dark .toggle-button{
-                background: #fff;
+            .theme-dark .drkmd-toggle-button{
+                background: ${this.options.buttonLight};
+                color: ${this.options.buttonDark}
             }
         `
 
         const div = document.createElement('div');
         const span = document.createElement('span');
-        span.innerHTML = '🌓';
-        div.className = "toggle-button";
+        span.innerHTML = this.options.label;
+        div.className = "drkmd-toggle-button";
         div.setAttribute("title", "Toggle dark mode");
         div.setAttribute("aria-label", "Toggle dark mode");
         div.setAttribute("aria-checked", "false");
@@ -66,7 +89,7 @@ export default class Darkmode {
 
     toLight(){
         document.documentElement.setAttribute('data-theme', 'light');
-        localStorage.setItem('darkmode', 'false');
+        this.options.localStorage ? localStorage.setItem('darkmode', false) : this.options.cookie ? this.setCookie(false) : ""
         document.body.classList.remove('theme-dark');
         document.body.classList.add('theme-light');
         this.dark = false;
@@ -74,7 +97,7 @@ export default class Darkmode {
 
     toDark(){
         document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('darkmode', 'true');
+        this.options.localStorage ? localStorage.setItem('darkmode', true) : this.options.cookie ? this.setCookie(true) : ""
         document.body.classList.add('theme-dark');
         document.body.classList.remove('theme-light');
         this.dark = true;
@@ -86,6 +109,15 @@ export default class Darkmode {
 
     switchThemePrefers() {
         this.preferedTheme() === true ? this.swichToDark() : this.swichToLight()
+    }
+
+    getCookie() {
+        const match = document.cookie.match(RegExp('(?:^|;\\s*)darkmode=([^;]*)'));
+        return match ? match[1] : null;
+    }
+
+    setCookie(value) {
+        document.cookie = `darkmode=${value}`;
     }
 
     addStyle(css) {

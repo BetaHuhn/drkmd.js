@@ -87,8 +87,8 @@ const options = {
   left: '32px', // default: 'unset'
   buttonLight: '#fff',  // default: '#fff'
   buttonDark: '#000', // default: '#000'
-  cookies: true, // default: false
-  localStorage: false // default: true (will take precedence over cookie)
+  cookie: true, // default: false
+  localStorage: false, // default: true (will take precedence over cookie)
   label: '', // default: '🌓'
   autoMatchOsTheme: false // default: true
 }

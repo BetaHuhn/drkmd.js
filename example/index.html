@@ -7,7 +7,7 @@
     <title>Darkmode example</title>
     <style>
         /* Light Colors*/
-        :root {
+        [data-theme="light"] {
             --background: #fff;
             --color: #000;
         }
@@ -33,10 +33,10 @@
 
 <script src="../dist/drkmd.min.js"></script>
 <script>
-    function addDarkmodeWidget() {
+    function addDarkmode() {
         new Darkmode().attach();
     }
-    window.addEventListener('load', addDarkmodeWidget);
+    window.addEventListener('load', addDarkmode);
 </script>
 
 </html>
