@@ -120,6 +120,15 @@ export default class Darkmode {
         document.cookie = `darkmode=${value}`;
     }
 
+    toggle(){
+        this.dark ? this.toLight() : this.toDark();
+        return this.dark;
+    }
+
+    isActivated(){
+       return this.dark;
+    }
+
     addStyle(css) {
         const linkElement = document.createElement('link');
     
