@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.1.9
+
+* change button position from absolute to fixed
+
 ## 0.1.8
 
 * Purge cache after publishing to npm

@@ -42,7 +42,7 @@ export default class Darkmode {
     attach(){
         const css = `
             .drkmd-toggle-button{
-                position: absolute;
+                position: fixed;
                 z-index: 1000;
                 left: ${this.options.left};
                 right: ${this.options.right};
