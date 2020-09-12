@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.0
+
+* add option to change default theme
+
 ## 0.1.9
 
 * change button position from absolute to fixed

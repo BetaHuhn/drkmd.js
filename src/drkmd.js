@@ -18,7 +18,8 @@ export default class Darkmode {
             cookie: false,
             localStorage: true,
             label: '🌓',
-            autoMatchOsTheme: true
+            autoMatchOsTheme: true,
+            defaultTheme: 'light',
         };
       
         options = Object.assign({}, defaultOptions, options);
@@ -35,7 +36,11 @@ export default class Darkmode {
         if(storageValue !== null){
             storageValue === 'true' || storageValue === true ? this.toDark() : this.toLight();
         }else{
-            options.autoMatchOsTheme && this.preferedTheme() ? this.toDark() : this.toLight();
+            if(options.autoMatchOsTheme){
+                this.preferedTheme() ? this.toDark() : this.toLight();
+            }else{
+                options.defaultTheme === 'light' ? this.toLight() : this.toDark();
+            }
         }
     }
 

@@ -127,7 +127,8 @@ const options = {
   cookie: true, // default: false
   localStorage: false, // default: true (will take precedence over cookie)
   label: '', // default: '🌓'
-  autoMatchOsTheme: false // default: true
+  autoMatchOsTheme: false, // default: true
+  defaultTheme: 'dark', // default: 'light'
 }
 
 const darkmode = new Darkmode(options);
