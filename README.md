@@ -4,7 +4,7 @@
 
 # drkmd.js
 
-[![Build](https://github.com/BetaHuhn/drkmd.js/workflows/Build/badge.svg)](https://github.com/BetaHuhn/drkmd.js/actions?query=workflow%3ABuild) ![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg) ![David](https://img.shields.io/david/betahuhn/drkmd.js) ![GitHub package.json version](https://img.shields.io/github/package-json/v/betahuhn/drkmd.js)
+[![Build](https://github.com/BetaHuhn/drkmd.js/workflows/Build/badge.svg)](https://github.com/BetaHuhn/drkmd.js/actions?query=workflow%3ABuild) [![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/BetaHuhn/drkmd.js/blob/master/LICENSE) ![David](https://img.shields.io/david/betahuhn/drkmd.js) [![npm](https://img.shields.io/npm/v/drkmd-js)](https://www.npmjs.com/package/drkmd-js) [![npm bundle size](https://img.badgesize.io/betahuhn/drkmd.js/master/dist/drkmd-js.min.js?compression=gzip)](https://github.com/BetaHuhn/drkmd.js)
 
 Simple dark-mode/light-mode logic for any website
 
@@ -166,4 +166,4 @@ The library was inspired by [Darkmode.js](https://github.com/sandoche/Darkmode.j
 
 Copyright 2020 Maximilian Schiller
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details

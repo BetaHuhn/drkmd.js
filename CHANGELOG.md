@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.1
+
+* add npm version and bundle size badge 
+
 ## 0.2.0
 
 * add option to change default theme
