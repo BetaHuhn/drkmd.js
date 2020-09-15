@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.2.2
+
+* add publish status notification
+
 ## 0.2.1
 
 * add npm version and bundle size badge 
