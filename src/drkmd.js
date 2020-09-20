@@ -32,7 +32,7 @@ export default class Darkmode {
             window.matchMedia("(prefers-color-scheme: light)").addListener(e => e.matches && this.switchThemePrefers())
         }
 
-        const storageValue = options.localStorage ? localStorage.getItem('darkmode') : options.cookie ? this.getCookie() : null;
+        const storageValue = options.localStorage && window.localStorage !== null ? window.localStorage.getItem('darkmode') : options.cookie ? this.getCookie() : null;
         if(storageValue !== null){
             storageValue === 'true' || storageValue === true ? this.toDark() : this.toLight();
         }else{
@@ -96,7 +96,7 @@ export default class Darkmode {
     toLight(){
         if(this.options.events) window.dispatchEvent(new CustomEvent('theme', { detail: { to: 'light' } }));
         document.documentElement.setAttribute('data-theme', 'light');
-        this.options.localStorage ? localStorage.setItem('darkmode', false) : this.options.cookie ? this.setCookie(false) : ""
+        this.options.localStorage && window.localStorage !== null ? window.localStorage.setItem('darkmode', false) : this.options.cookie ? this.setCookie(false) : ""
         document.body.classList.remove('theme-dark');
         document.body.classList.add('theme-light');
         this.dark = false;
@@ -105,7 +105,7 @@ export default class Darkmode {
     toDark(){
         if(this.options.events) window.dispatchEvent(new CustomEvent('theme', { detail: { to: 'dark' } }));
         document.documentElement.setAttribute('data-theme', 'dark');
-        this.options.localStorage ? localStorage.setItem('darkmode', true) : this.options.cookie ? this.setCookie(true) : ""
+        this.options.localStorage && window.localStorage !== null ? window.localStorage.setItem('darkmode', true) : this.options.cookie ? this.setCookie(true) : ""
         document.body.classList.add('theme-dark');
         document.body.classList.remove('theme-light');
         this.dark = true;
