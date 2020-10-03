@@ -79,14 +79,14 @@ body {
 
 ### Events
 
-By default [drkmd.js](https://github.com/BetaHuhn/drkmd.js) emits a `theme` event if the theme changes:
+By default [drkmd.js](https://github.com/BetaHuhn/drkmd.js) emits a `theme-change` event if the theme changes:
 
 ```js
 import Darkmode from 'drkmd-js';
 
 new Darkmode();
 
-window.addEventListener('theme', e => {
+window.addEventListener('theme-change', e => {
     console.log(e.detail.to); // will return 'light' or 'dark'
 });
 
