@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [v0.2.6] - 2020-10-03
 ### Changed
-- emit `theme-change` event instead of `theme` event
+- **BREAKING**: emit `theme-change` event instead of `theme` event
 
 ## [v0.2.5] - 2020-09-20
 ### Added
