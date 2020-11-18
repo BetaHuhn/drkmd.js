@@ -12,7 +12,7 @@ jobs:
         with:
           node-version: '12.x'
           registry-url: 'https://registry.npmjs.org'
-      - run: npm run ci
+      - run: npm ci
       - run : npm run build
       - uses: BetaHuhn/do-spaces-action@master
         with:
