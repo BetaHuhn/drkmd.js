@@ -1,0 +1,24 @@
+name: Upload to CDN
+on:
+  release:
+    types: [created]
+jobs:
+  upload:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm run ci
+      - run : npm run build
+      - uses: BetaHuhn/do-spaces-action@master
+        with:
+          access_key: ${{ secrets.ACCESS_KEY}}
+          secret_key: ${{ secrets.SECRET_KEY }}
+          space_name: ${{ secrets.SPACE_NAME }}
+          space_region: ${{ secrets.SPACE_REGION }}
+          source: "dist/drkmd-js.min.js"
+          out_dir: "dist/drkmd-js"
+          versioning: true
