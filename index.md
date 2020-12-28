@@ -1,17 +1,12 @@
-<div align="center">
+<p align="center">
+  <img src="https://cdn.mxis.ch/assets/drkmd-js/moon.png" title="drkmd.js icon" alt="icon" width="128">
+</p>
 
-<img src="https://cdn.mxis.ch/assets/drkmd-js/moon.png" title="drkmd.js icon" alt="icon" width="128">
-
-# drkmd.js
+<h1 align="center">drkmd.js</h1>
 
 [![Build](https://github.com/BetaHuhn/drkmd.js/workflows/Build/badge.svg)](https://github.com/BetaHuhn/drkmd.js/actions?query=workflow%3ABuild) [![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/BetaHuhn/drkmd.js/blob/master/LICENSE) [![npm](https://img.shields.io/npm/v/drkmd-js)](https://www.npmjs.com/package/drkmd-js) [![npm bundle size](https://img.badgesize.io/betahuhn/drkmd.js/master/dist/drkmd-js.min.js?compression=gzip)](https://github.com/BetaHuhn/drkmd.js)
 
-Simple dark-mode/light-mode logic for any website
-
 [🔮 Live Demo](https://codepen.io/BetaHuhn/pen/oNxdBzK)
-<br/>
-
-</div>
 
 ## 👋 Introduction
 
