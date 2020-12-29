@@ -1,11 +1,3 @@
-<script src="https://cdn.jsdelivr.net/npm/drkmd-js/dist/drkmd-js.min.js"></script>
-<script>
-    function addDarkmode() {
-        new Darkmode().attach();
-    }
-    window.addEventListener('load', addDarkmode);
-</script>
-
 <p align="center">
   <img src="https://cdn.mxis.ch/assets/drkmd-js/moon.png" title="drkmd.js icon" alt="icon" width="128">
 </p>
