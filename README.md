@@ -148,6 +148,8 @@ All examples below use `drkmd-js` by loading it via a CDN in a script tag (more 
 <script src="https://cdn.jsdelivr.net/npm/drkmd-js/dist/drkmd-js.min.js"></script>
 ```
 
+---
+
 ### Basic
 
 Render the darkmode toggle with all the default options:
@@ -178,6 +180,8 @@ body {
 }
 ```
 
+---
+
 ### With options
 
 Render the darkmode toggle with custom options:
@@ -192,6 +196,8 @@ const options = {
 
 new Darkmode(options).attach()
 ```
+
+---
 
 ### Custom darkmode toggle
 
@@ -210,6 +216,8 @@ document.getElementById('myBtn').addEventListener('click', function() {
     darkmode.toggle()
 })
 ```
+
+---
 
 ### Different images depending on the theme
 
@@ -234,6 +242,8 @@ window.addEventListener('theme-change', e => {
     document.getElementById('image').src = imageSrc[theme]
 })
 ```
+
+---
 
 ### Different styles depending on the theme
 
