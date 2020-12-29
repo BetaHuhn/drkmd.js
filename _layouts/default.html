@@ -61,12 +61,12 @@
       ga('create', '{{ site.google_analytics }}', 'auto');
       ga('send', 'pageview');
     </script>
+    {% endif %}
     <script>
         function addDarkmode() {
             new Darkmode().attach();
         }
         addDarkmode()
     </script>
-    {% endif %}
   </body>
 </html>
