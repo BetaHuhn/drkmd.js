@@ -9,6 +9,7 @@
     --font: #222;
     --font-light: #727272;
     --blue: #267CB9;
+    --blue-hover: #1a77b9;
 }
 
 [data-theme="dark"] {
@@ -18,6 +19,7 @@
     --font: rgb(236, 236, 236);
     --font-light: #8b949e;
     --blue: #58A6FF;
+    --blue-hover: #3f95f8;
 }
 
 body {
@@ -59,19 +61,19 @@ a {
 }
 
 a:hover, a:focus {
-  color:#069;
+  color: var(--blue-hover);
   font-weight: bold;
 }
 
 a small {
   font-size:11px;
-  color:#777;
+  color: var(--font-light);
   margin-top:-0.3em;
   display:block;
 }
 
 a:hover small {
-  color:#777;
+  color: var(--font-light);
 }
 
 .wrapper {
@@ -84,39 +86,6 @@ blockquote {
   margin:0;
   padding:0 0 0 20px;
   font-style:italic;
-}
-
-code, pre {
-  font-family:Monaco, Bitstream Vera Sans Mono, Lucida Console, Terminal, Consolas, Liberation Mono, DejaVu Sans Mono, Courier New, monospace;
-  color: var(--font);
-}
-
-pre {
-  padding:8px 15px;
-  background: var(--background-sec);
-  border-radius:5px;
-  border:1px solid var(--background-sec-dark);
-  overflow-x: auto;
-}
-
-table {
-  width:100%;
-  border-collapse:collapse;
-}
-
-th, td {
-  text-align:left;
-  padding:5px 10px;
-  border-bottom:1px solid var(--background-sec-dark);
-}
-
-dt {
-  color: var(--font);
-  font-weight:700;
-}
-
-th {
-  color: var(--font);
 }
 
 img {
