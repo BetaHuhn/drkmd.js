@@ -52,10 +52,7 @@
     </div>
     <script src="{{ "/assets/js/scale.fix.js" | relative_url }}"></script>
     <script>
-        function addDarkmode() {
-            new Darkmode().attach();
-        }
-        addDarkmode()
+        new Darkmode({ autoMatchOsTheme: false }).attach()
     </script>
   </body>
 </html>

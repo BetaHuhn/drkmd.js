@@ -18,6 +18,8 @@
 
 [drkmd.js](https://github.com/BetaHuhn/drkmd.js) (short for darkmode.js) lets you add a dark-mode/light-mode toggle to any website. The library detects the system theme automatically and even saves the users choice in local storage or as a cookie.
 
+Try it by clicking the button in the bottom right corner of this page!
+
 The library will add the class `theme-dark`/`theme-light` to the body of the page and set the attribute `data-theme` to `dark`/`light` on the html tag. See [usage](https://github.com/BetaHuhn/drkmd.js#usage) below how you can customize your page with this.
 
 ## 🚀 Get started
