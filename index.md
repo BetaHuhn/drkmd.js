@@ -4,9 +4,15 @@
 
 <h1 align="center">drkmd.js</h1>
 
-[![Build](https://github.com/BetaHuhn/drkmd.js/workflows/Build/badge.svg)](https://github.com/BetaHuhn/drkmd.js/actions?query=workflow%3ABuild) [![GitHub](https://img.shields.io/github/license/mashape/apistatus.svg)](https://github.com/BetaHuhn/drkmd.js/blob/master/LICENSE) [![npm](https://img.shields.io/npm/v/drkmd-js)](https://www.npmjs.com/package/drkmd-js) [![npm bundle size](https://img.badgesize.io/betahuhn/drkmd.js/master/dist/drkmd-js.min.js?compression=gzip)](https://github.com/BetaHuhn/drkmd.js)
+<p align="center"><a href="https://github.com/BetaHuhn/drkmd.js/actions?query=workflow%3ABuild"><img src="https://github.com/BetaHuhn/drkmd.js/workflows/Build/badge.svg" alt="Build"></a> <a href="https://github.com/BetaHuhn/drkmd.js/blob/master/LICENSE"><img src="https://img.shields.io/github/license/mashape/apistatus.svg" alt="GitHub"></a> <a href="https://www.npmjs.com/package/drkmd-js"><img src="https://img.shields.io/npm/v/drkmd-js" alt="npm"></a> <a href="https://github.com/BetaHuhn/drkmd.js"><img src="https://img.badgesize.io/betahuhn/drkmd.js/master/dist/drkmd-js.min.js?compression=gzip" alt="npm bundle size"></a></p>
 
-[🔮 Live Demo](https://codepen.io/BetaHuhn/pen/oNxdBzK)
+<p align="center">
+   <a href="https://nodei.co/npm/drkmd-js/"><img src="https://nodei.co/npm/drkmd-js.png?compact=true"></a>
+</p>
+
+<p align="center">
+   <a href="https://codepen.io/BetaHuhn/pen/oNxdBzK">🔮 Live Demo</a>
+</p>
 
 ## 👋 Introduction
 
@@ -87,7 +93,9 @@ window.addEventListener('theme-change', e => {
 
 ```
 
-## 🛠️ Manuall usage
+The `theme-change` event could be used to change the `src` attribute of an `<img>` tag depending on the theme ([more info](https://github.com/BetaHuhn/drkmd.js/discussions/11#discussioncomment-247341)) or modify the page in any other way with JavaScript when the theme changes.
+
+## 🛠️ Manual Usage
 
 If you don't want to show the button and enable/disable Darkmode programatically you can use the method `toggle()`:
 
@@ -129,6 +137,134 @@ const options = {
 const darkmode = new Darkmode(options);
 darkmode.attach();
 ```
+
+## ⚡ Examples
+
+All examples below use `drkmd-js` by loading it via a CDN in a script tag (more info in the [get started](#-get-started) section):
+
+**HTML**
+```html
+<script src="https://cdn.jsdelivr.net/npm/drkmd-js/dist/drkmd-js.min.js"></script>
+```
+
+---
+
+### Basic
+
+Render the darkmode toggle with all the default options:
+
+**JavaScript**
+```js
+new Darkmode().attach()
+```
+
+Specify different colors for each theme with CSS variables:
+
+**CSS**
+```css
+[data-theme="light"] {
+    --background: #fff;
+    --color: #000;
+}
+
+[data-theme="dark"] {
+    --background: #000;
+    --color: #fff;
+}
+
+html,
+body {
+    background: var(--background);
+    color: var(--color);
+}
+```
+
+---
+
+### With options
+
+Render the darkmode toggle with custom options:
+
+**JavaScript**
+```js
+const options = {
+  right: 'unset',
+  left: '32px',
+  defaultTheme: 'dark',
+}
+
+new Darkmode(options).attach()
+```
+
+---
+
+### Custom darkmode toggle
+
+Don't render the darkmode toggle, instead change the theme on a button press:
+
+**HTML**
+```html
+<button id="myBtn">Change theme</button>
+```
+
+**JavaScript**
+```js
+const darkmode = new Darkmode()
+
+document.getElementById('myBtn').addEventListener('click', function() {
+    darkmode.toggle()
+})
+```
+
+---
+
+### Different images depending on the theme
+
+You can use the `theme-change` event to modify an element with JavaScript. Here we are changing the `src` attribute of an `img` tag when the theme changes:
+
+**HTML**
+```html
+<img id="image" src="/path/to/dark.png">
+```
+
+**JavaScript**
+```js
+new Darkmode().attach()
+
+const imageSrc = {
+   dark: "/path/to/dark.png",
+   light: "/path/to/light.png"
+}
+
+window.addEventListener('theme-change', e => {
+    const theme = e.detail.to // will return 'light' or 'dark'
+    document.getElementById('image').src = imageSrc[theme]
+})
+```
+
+---
+
+### Different styles depending on the theme
+
+You can use the classes `theme-dark` and `theme-light` to use different styles depending on the theme:
+
+**JavaScript**
+```js
+new Darkmode().attach()
+```
+
+**CSS**
+```css
+.theme-dark {
+    /* Styles for dark theme */
+}
+
+.theme-light {
+    /* Styles for light theme */
+}
+```
+
+> **Note:** The classes will be added to the `body` of your HTML page.
 
 ## 🌍 Browser compatibility
 
