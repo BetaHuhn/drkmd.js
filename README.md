@@ -8,6 +8,8 @@
 
 Simple dark-mode/light-mode logic for any website
 
+[![NPM](https://nodei.co/npm/drkmd-js.png?compact=true)](https://nodei.co/npm/drkmd-js/)
+
 [🔮 Live Demo](https://codepen.io/BetaHuhn/pen/oNxdBzK)
 <br/>
 
@@ -94,7 +96,7 @@ window.addEventListener('theme-change', e => {
 
 The `theme-change` event could be used to change the `src` attribute of an `<img>` tag depending on the theme ([more info](https://github.com/BetaHuhn/drkmd.js/discussions/11#discussioncomment-247341)) or modify the page in any other way with JavaScript when the theme changes.
 
-## 🛠️ Manuall usage
+## 🛠️ Manual Usage
 
 If you don't want to show the button and enable/disable Darkmode programatically you can use the method `toggle()`:
 
