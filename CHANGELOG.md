@@ -1,3 +1,11 @@
+## [v0.2.9] - 2021-01-01
+
+[Release notes](https://github.com/BetaHuhn/drkmd.js/releases/tag/v0.2.9) · [Compare](https://github.com/BetaHuhn/drkmd.js/compare/v0.2.8...v0.2.9) · [Tag](https://github.com/BetaHuhn/drkmd.js/tree/v0.2.9) · Archive ([zip](https://github.com/BetaHuhn/drkmd.js/archive/v0.2.9.zip) · [tar.gz](https://github.com/BetaHuhn/drkmd.js/archive/v0.2.9.tar.gz))
+
+### Updates
+
+- [`6c4cc21`](https://github.com/BetaHuhn/drkmd.js/commit/6c4cc21)  Use semantic-release
+
 ## [v0.2.8] - 2020-12-29
 ### Changed
 - update dependencies
