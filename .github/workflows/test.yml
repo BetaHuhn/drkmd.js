@@ -1,8 +1,16 @@
-name: Build
-on: [push, pull_request]
+name: Test CI
+on:
+  push:
+    branches-ignore:
+      - master
+  pull_request:
+    branches-ignore:
+      - master
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     strategy:
       matrix:
         node-version: [10.x, 12.x, 14.x]
