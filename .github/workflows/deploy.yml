@@ -42,6 +42,7 @@ jobs:
           commit_author: BetaHuhn Bot <bot@mxis.ch>
   upload:
     needs: build
+    name: Upload to CDN
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
