@@ -1,3 +1,7 @@
+## [v0.2.18] - 2021-04-05
+
+[Release notes](https://github.com/BetaHuhn/drkmd.js/releases/tag/v0.2.18) · [Compare](https://github.com/BetaHuhn/drkmd.js/compare/v0.2.17...v0.2.18) · [Tag](https://github.com/BetaHuhn/drkmd.js/tree/v0.2.18) · Archive ([zip](https://github.com/BetaHuhn/drkmd.js/archive/v0.2.18.zip) · [tar.gz](https://github.com/BetaHuhn/drkmd.js/archive/v0.2.18.tar.gz))
+
 ## [v0.2.17] - 2021-03-22
 
 [Release notes](https://github.com/BetaHuhn/drkmd.js/releases/tag/v0.2.17) · [Compare](https://github.com/BetaHuhn/drkmd.js/compare/v0.2.16...v0.2.17) · [Tag](https://github.com/BetaHuhn/drkmd.js/tree/v0.2.17) · Archive ([zip](https://github.com/BetaHuhn/drkmd.js/archive/v0.2.17.zip) · [tar.gz](https://github.com/BetaHuhn/drkmd.js/archive/v0.2.17.tar.gz))
