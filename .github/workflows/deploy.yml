@@ -4,32 +4,7 @@ on:
     types: [created]
   workflow_dispatch:
 jobs:
-  build:
-    name: Build and Commit
-    runs-on: ubuntu-latest
-    if: "!contains(github.event.head_commit.message, '[skip ci]')"
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: 14
-      - name: Cache node modules
-        uses: c-hive/gha-npm-cache@v1
-      - name: Install dependencies
-        run: npm ci
-      - name: Run build command
-        run: npm run build
-      - name: Commit build
-        uses: stefanzweifel/git-auto-commit-action@v4.9.2
-        with:
-          commit_message: ":rocket: Deploy new version [skip ci]"
-          commit_user_name: BetaHuhn Bot
-          commit_user_email: bot@mxis.ch
-          commit_author: BetaHuhn Bot <bot@mxis.ch>
   upload:
-    needs: [build]
     name: Upload to CDN
     runs-on: ubuntu-latest
     steps:
@@ -43,3 +18,9 @@ jobs:
           source: "dist/drkmd-js.min.js"
           out_dir: "dist/drkmd-js"
           versioning: true
+  purge:
+    name: Purge JSDelivr
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send Purge request to JSDelivr
+        run: curl https://purge.jsdelivr.net/npm/drkmd-js/dist/drkmd-js.min.js
