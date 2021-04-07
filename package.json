@@ -5,8 +5,8 @@
   "main": "dist/drkmd-js.min.js",
   "scripts": {
     "lint": "eslint ./src/",
+    "dev": "watch 'npm run build' ./src/ ./example/ --interval=1",
     "build": "node build.js",
-    "watch": "watch 'npm run build' ./src/ ./example/ --interval=1",
     "semantic-release": "semantic-release"
   },
   "repository": {
