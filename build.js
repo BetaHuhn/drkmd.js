@@ -12,6 +12,6 @@ js('src/index.js', {
 
 }).then((data) => {
 
-	return writeFile(`dist/${pgk.name}.min.js`, data)
+	return writeFile(`dist/${ pgk.name }.min.js`, data)
 
 })
