@@ -200,6 +200,8 @@ const darkmode = new Darkmode(options)
 
 ### Basic
 
+[View example file](https://github.com/BetaHuhn/drkmd.js/blob/master/examples/basic/index.html)
+
 Render the darkmode toggle with all the default options.
 
 Import [drkmd.js](https://github.com/BetaHuhn/drkmd.js) like this:
@@ -236,6 +238,8 @@ Then specify the styles for the light and dark theme:
 
 ### CSS variables
 
+[View example file](https://github.com/BetaHuhn/drkmd.js/blob/master/examples/css-variables/index.html)
+
 If you want to specify different colors for each theme, you can use [css-variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties):
 
 **CSS**
@@ -263,6 +267,8 @@ body {
 
 ### With options
 
+[View example file](https://github.com/BetaHuhn/drkmd.js/blob/master/examples/options/index.html)
+
 Render the darkmode toggle with custom options:
 
 **HTML**
@@ -288,6 +294,8 @@ new Darkmode(options).attach()
 ---
 
 ### Custom darkmode toggle
+
+[View example file](https://github.com/BetaHuhn/drkmd.js/blob/master/examples/custom-toggle/index.html)
 
 Don't render the darkmode toggle, instead change the theme when a custom HTML element is clicked.
 
@@ -321,6 +329,8 @@ There's also `data-drkmd-to-light` and `data-drkmd-to-dark` which will change th
 
 ### Different images depending on the theme
 
+[View example file](https://github.com/BetaHuhn/drkmd.js/blob/master/examples/events/index.html)
+
 You can use the `theme-change` [event](#events) to modify an element with JavaScript. Here we are changing the `src` attribute of an `img` tag when the theme changes:
 
 **HTML**
@@ -347,6 +357,8 @@ window.addEventListener('theme-change', e => {
 
 ### Programmatic usage
 
+[View example file](https://github.com/BetaHuhn/drkmd.js/blob/master/examples/programmatic/index.html)
+
 You can also control the theme programmatically.
 
 Import [drkmd.js](https://github.com/BetaHuhn/drkmd.js) like this:
@@ -365,18 +377,29 @@ or
 import Darkmode from 'drkmd-js'
 ```
 
+Add HTML elements:
+
+```html
+<button id="myBtn">Click me</button>
+<span id="theme">Current theme:</span>
+```
+
 Then create a new Darkmode instance and use any of the available methods:
 
 ```js
 const darkmode = new Darkmode()
 
-document.getElementById('myBtn').addEventListener('click', () => {
-    if (darkmode.isDark()) {
-        // Do something
-    }
+const updateValue = () => {
+    document.getElementById('theme').innerText = `Current theme: ${ darkmode.currentTheme() }`
+}
 
-    darkmode.toLight()
+document.getElementById('myBtn').addEventListener('click', () => {
+    darkmode.toggle()
+
+    updateValue()
 })
+
+updateValue()
 ```
 
 ## 🌍 Browser compatibility
