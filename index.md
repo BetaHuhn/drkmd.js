@@ -14,28 +14,29 @@
    <a href="https://codepen.io/BetaHuhn/pen/oNxdBzK">🔮 Live Demo</a>
 </p>
 
+## ⚡ Features
+
+- Easy to integrate with any site (via [script tag](#script-tag) or [NPM](#npm))
+- Specify different styles for the dark and light mode with [CSS classes](#styling)
+- Automatically detects system theme (and theme changes)
+- Trigger a them change with the [default theme toggle](#default-theme-toggle), a [custom element](#custom-buttons) or even [programmatically](#programmatic)
+- Stores users choice in local storage or [optionally](#%EF%B8%8F-options) as a cookie
+- Emits a `theme-change` [event](#events) for advanced use cases like [changing images](#different-images-depending-on-the-theme)
+
 ## 👋 Introduction
 
 [drkmd.js](https://github.com/BetaHuhn/drkmd.js) (short for darkmode.js) lets you add a dark-mode/light-mode toggle to any website. The library detects the system theme automatically and even saves the users choice in local storage or as a cookie.
 
-Try it by clicking the button in the bottom right corner of this page!
-
-The library will add the class `theme-dark`/`theme-light` to the body of the page and set the attribute `data-theme` to `dark`/`light` on the html tag. See [usage](https://github.com/BetaHuhn/drkmd.js#usage) below how you can customize your page with this.
+The library will add the class `theme-dark`/`theme-light` to the body of the page and set the attribute `data-theme` to `dark`/`light` on the html tag which can be used to specify different css styles depending on the theme. You can also listen to a `theme-change` event for more advanced use cases. See [usage](#-usage) below how you can customize your page with this.
 
 ## 🚀 Get started
 
-### JSDelivr
+### Script tag
 
 Add this to your HTML page:
 
 ```html
-<script src="https://cdn.jsdelivr.net/npm/drkmd-js/dist/drkmd-js.min.js"></script>
-<script>
-    function addDarkmode() {
-        new Darkmode().attach();
-    }
-    window.addEventListener('load', addDarkmode);
-</script>
+<script src="https://cdn.jsdelivr.net/npm/drkmd-js/dist/drkmd-js.min.js" data-drkmd-attach></script>
 ```
 
 ### NPM
@@ -49,127 +50,207 @@ npm install drkmd-js
 Then add the following JavaScript code:
 
 ```javascript
-import Darkmode from 'drkmd-js';
+import Darkmode from 'drkmd-js'
 
-new Darkmode().attach();
+new Darkmode().attach()
 ```
 
-By default [drkmd.js](https://github.com/BetaHuhn/drkmd.js) will add the button to the bottom right corner and save the users choice in local storage, this can be configured using the [options](https://github.com/BetaHuhn/drkmd.js#options) object.
+Both methods will add the [darkmode toggle](#default-theme-toggle) with all the default [options](#%EF%B8%8F-options) to your page.
+
+The last step is to specify the [styling](#styling) for each theme and then you're done 🎉
+
+Enjoy the dark side 🖤
 
 ## 📚 Usage
 
-You can either use the class `theme-dark`/`theme-light` to change your css depending on the theme, or set css variables to specify colors for each theme:
+### Styling
+
+There are multiple ways to specify the different styles for the dark and light mode when using [drkmd.js](https://github.com/BetaHuhn/drkmd.js).
+
+[drkmd.js](https://github.com/BetaHuhn/drkmd.js) adds the class `theme-dark`/`theme-light` to the body element of your page, which can be used to specify different styles for each theme:
 
 ```css
-/* Light Colors */
-[data-theme="light"] {
-    --background: #fff;
-    --color: #000;
+/* Styles for light theme */
+.theme-light {
+    background: #fff;
 }
 
-/* Dark Colors */
-[data-theme="dark"] {
-    --background: #000;
-    --color: #fff;
-}
-
-html,
-body {
-    background: var(--background);
-    color: var(--color);
+/* Styles for dark theme */
+.theme-dark {
+    background: #000;
 }
 ```
 
-### Events
+In most cases it is easier to specify [css-variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties) for different themes (See [below](#css-variables) for an example).
 
-By default [drkmd.js](https://github.com/BetaHuhn/drkmd.js) emits a `theme-change` event if the theme changes:
+[drkmd.js](https://github.com/BetaHuhn/drkmd.js) also adds the attribute `data-theme` with either `light` or `dark` as the value to the html tag. With this the different themes can also be specified with the css selector `[data-theme="dark"]` and `[data-theme="dark"]`.
 
-```js
-import Darkmode from 'drkmd-js';
+### Default theme toggle
 
-new Darkmode();
+The easiest way to change the theme is to use the included theme toggle by either adding the `data-drkmd-attach` attribute to the script tag (or any other element):
 
-window.addEventListener('theme-change', e => {
-    console.log(e.detail.to); // will return 'light' or 'dark'
-});
-
+```html
+<script src="https://cdn.jsdelivr.net/npm/drkmd-js/dist/drkmd-js.min.js" data-drkmd-attach></script>
 ```
 
-The `theme-change` event could be used to change the `src` attribute of an `<img>` tag depending on the theme ([more info](https://github.com/BetaHuhn/drkmd.js/discussions/11#discussioncomment-247341)) or modify the page in any other way with JavaScript when the theme changes.
-
-## 🛠️ Manual Usage
-
-If you don't want to show the button and enable/disable Darkmode programatically you can use the method `toggle()`:
+or by calling `.attach()`:
 
 ```javascript
-const darkmode = new Darkmode();
-darkmode.toggle();
+new Darkmode().attach()
+```
+
+If you use any of the [options](#%EF%B8%8F-options) you can also set `attach: true` to achieve the same as the two methods above. 
+
+By default the button will be added to the bottom right corner of the page and the users choice will be saved in local storage. This can be configured using the [options](#%EF%B8%8F-options).
+
+### Custom buttons
+
+You can add the attribute `data-drkmd-toggle` to any element to transform it into a theme toggle: 
+
+```html
+<span data-drkmd-toggle>Toggle theme</span>
+```
+
+When the element is clicked the current theme will be changed. 
+
+You can also use `data-drkmd-to-light` and `data-drkmd-to-dark` to switch to a specific theme.
+
+### Programmatic
+
+[drkmd.js](https://github.com/BetaHuhn/drkmd.js) can also be used programmatically for more advanced use cases.
+
+To enable/disable Darkmode you can use the method `toggle()`:
+
+```javascript
+const darkmode = new Darkmode()
+darkmode.toggle()
 ```
 
 There are also other methods available:
 
 ```js
-darkmode.attach() //Create default darkmode button
-darkmode.toggle() // Toggle theme
-darkmode.isActivated() // If darkmode is active
+darkmode.attach() // Attach the default darkmode button to the page
+darkmode.toggle() // Toggle the theme
 darkmode.toLight() // Change theme to light
 darkmode.toDark() // Change theme to dark
+darkmode.currentTheme() // Returns the current theme as a string (dark/light)
+darkmode.isDark() // Returns true if the current theme is dark
+darkmode.isLight() // Returns true if the current theme is light
 ```
+
+### Events
+
+By default [drkmd.js](https://github.com/BetaHuhn/drkmd.js) emits a `theme-change` event everytime the theme changes:
+
+```js
+import Darkmode from 'drkmd-js'
+
+new Darkmode()
+
+window.addEventListener('theme-change', e => {
+    console.log(e.detail.to) // will return 'light' or 'dark'
+})
+```
+
+This can be turned off by setting the option `events: false`.
+
+The `theme-change` event could be used to change the `src` attribute of an `<img>` tag depending on the theme (example [below](#different-images-depending-on-the-theme)) or modify the page in any other way with JavaScript when the theme changes.
 
 ## ⚙️ Options
 
-You can customize [drkmd.js](https://github.com/BetaHuhn/drkmd.js) by passing a options object to `new Darkmode()`:
+You can customize the behaviour of [drkmd.js](https://github.com/BetaHuhn/drkmd.js) and the style of the included toggle with these options:
+
+| Name | Description | Default | Example |
+| ------------- | ------------- | ------------- | ------------- |
+| `localStorage` | Store the users choice in the local storage | `true` | `false` |
+| `cookie` | Store the users choice in a cookie (local storage takes precedence) | `false` | `true` |
+| `events` | Emit the [`theme-change` event](#events) | `true` | `false` |
+| `autoMatchOsTheme` | Detect the system theme and automatically change to it | `true` | `false` |
+| `defaultTheme` | Specify which theme should be used on the first visit | `light` | `dark` |
+| `attach` | Specify if the default toggle should be attached (can be used instead of [`data-drkmd-attach`](#default-theme-toggle)) | `false` | `true` |
+| `label` | Specify a custom label for the theme toggle | `🌓` | `💡` |
+| `buttonLight` | Background color of the theme toggle for the light mode | `#fff` | `#222` |
+| `buttonDark` | Background color of the theme toggle for the dark mode | `#000` | `#222` |
+| `top` | Space in px from the toggle to the top of the page (if set toggle will be placed at the top) | `unset` | `20px` |
+| `bottom` | Space in px from the toggle to the bottom of the page (if set toggle will be placed at the bottom) | `20px` | `unset` |
+| `right` | Space in px from the toggle to the right edge of the page (if set toggle will be placed on the left side)| `unset` | `20px` |
+| `left` | Space in px from the toggle to the left edge of the page (if set toggle will be placed on the right side) | `20px` | `unset` |
+
+You can specify any number of them as the value for the `data-drkmd-opts` attribute (make sure the value is valid JSON):
+
+```html
+<script src="https://cdn.jsdelivr.net/npm/drkmd-js/dist/drkmd-js.min.js" data-drkmd-opts='{ "defaultTheme": "dark", "cookie": true }'></script>
+```
+
+> This works on any element, not just the script tag, so you can even use it when you are loading [drkmd.js](https://github.com/BetaHuhn/drkmd.js) via [NPM](#npm).
+
+or you can pass them as a JS object to `new Darkmode()`:
 
 ```js
 const options = {
-  top: '20px', // default: 'unset'
-  bottom: 'unset', // default: '20px'
-  right: 'unset', // default: '20px'
-  left: '32px', // default: 'unset'
-  buttonLight: '#fff',  // default: '#fff'
-  buttonDark: '#000', // default: '#000'
-  events: false, // default: true
-  cookie: true, // default: false
-  localStorage: false, // default: true (will take precedence over cookie)
-  label: '', // default: '🌓'
-  autoMatchOsTheme: false, // default: true
-  defaultTheme: 'dark', // default: 'light'
+  cookie: true,
+  defaultTheme: 'dark',
 }
 
-const darkmode = new Darkmode(options);
-darkmode.attach();
+const darkmode = new Darkmode(options)
 ```
 
-## ⚡ Examples
+## 📖 Examples
 
-All examples below use `drkmd-js` by loading it via a CDN in a script tag (more info in the [get started](#-get-started) section):
+### Basic
+
+[View example file](https://github.com/BetaHuhn/drkmd.js/blob/master/examples/basic/index.html)
+
+Render the darkmode toggle with all the default options.
+
+Import [drkmd.js](https://github.com/BetaHuhn/drkmd.js) like this:
 
 **HTML**
 ```html
-<script src="https://cdn.jsdelivr.net/npm/drkmd-js/dist/drkmd-js.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/drkmd-js/dist/drkmd-js.min.js" data-drkmd-attach></script>
+```
+
+or
+
+**JavaScript**
+```js
+import Darkmode from 'drkmd-js'
+new Darkmode().attach()
+```
+
+Then specify the styles for the light and dark theme:
+
+**CSS**
+```css
+/* Styles for light theme */
+.theme-light {
+    background: #fff;
+}
+
+/* Styles for dark theme */
+.theme-dark {
+    background: #000;
+}
 ```
 
 ---
 
-### Basic
+### CSS variables
 
-Render the darkmode toggle with all the default options:
+[View example file](https://github.com/BetaHuhn/drkmd.js/blob/master/examples/css-variables/index.html)
 
-**JavaScript**
-```js
-new Darkmode().attach()
-```
-
-Specify different colors for each theme with CSS variables:
+If you want to specify different colors for each theme, you can use [css-variables](https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties):
 
 **CSS**
 ```css
-[data-theme="light"] {
+/* Light Colors */
+.theme-light {
     --background: #fff;
     --color: #000;
 }
 
-[data-theme="dark"] {
+/* Dark Colors */
+.theme-dark {
     --background: #000;
     --color: #fff;
 }
@@ -185,10 +266,21 @@ body {
 
 ### With options
 
+[View example file](https://github.com/BetaHuhn/drkmd.js/blob/master/examples/options/index.html)
+
 Render the darkmode toggle with custom options:
+
+**HTML**
+```html
+<script src="https://cdn.jsdelivr.net/npm/drkmd-js/dist/drkmd-js.min.js" data-drkmd-opts='{ "right": "unset", "left": "32px", "defaultTheme": "dark" }'></script>
+```
+
+or
 
 **JavaScript**
 ```js
+import Darkmode from 'drkmd-js'
+
 const options = {
   right: 'unset',
   left: '32px',
@@ -202,27 +294,43 @@ new Darkmode(options).attach()
 
 ### Custom darkmode toggle
 
-Don't render the darkmode toggle, instead change the theme on a button press:
+[View example file](https://github.com/BetaHuhn/drkmd.js/blob/master/examples/custom-toggle/index.html)
+
+Don't render the darkmode toggle, instead change the theme when a custom HTML element is clicked.
+
+Import [drkmd.js](https://github.com/BetaHuhn/drkmd.js) like this:
 
 **HTML**
 ```html
-<button id="myBtn">Change theme</button>
+<script src="https://cdn.jsdelivr.net/npm/drkmd-js/dist/drkmd-js.min.js"></script>
 ```
+
+> Note: `data-drkmd-attach` is missing because we don't want to attach the default toggle to the page
+
+or
 
 **JavaScript**
 ```js
-const darkmode = new Darkmode()
-
-document.getElementById('myBtn').addEventListener('click', function() {
-    darkmode.toggle()
-})
+import Darkmode from 'drkmd-js'
 ```
+
+Then on your custom element add the attribute `data-drkmd-toggle`:
+
+```html
+<span data-drkmd-toggle>Change theme</span>
+```
+
+When you click that element, the theme will be toggled automatically.
+
+There's also `data-drkmd-to-light` and `data-drkmd-to-dark` which will change the theme to either dark or light specifically.
 
 ---
 
 ### Different images depending on the theme
 
-You can use the `theme-change` event to modify an element with JavaScript. Here we are changing the `src` attribute of an `img` tag when the theme changes:
+[View example file](https://github.com/BetaHuhn/drkmd.js/blob/master/examples/events/index.html)
+
+You can use the `theme-change` [event](#events) to modify an element with JavaScript. Here we are changing the `src` attribute of an `img` tag when the theme changes:
 
 **HTML**
 ```html
@@ -231,7 +339,7 @@ You can use the `theme-change` event to modify an element with JavaScript. Here 
 
 **JavaScript**
 ```js
-new Darkmode().attach()
+new Darkmode().attach() // or use the data-drkmd-attach attribute
 
 const imageSrc = {
    dark: "/path/to/dark.png",
@@ -246,27 +354,52 @@ window.addEventListener('theme-change', e => {
 
 ---
 
-### Different styles depending on the theme
+### Programmatic usage
 
-You can use the classes `theme-dark` and `theme-light` to use different styles depending on the theme:
+[View example file](https://github.com/BetaHuhn/drkmd.js/blob/master/examples/programmatic/index.html)
+
+You can also control the theme programmatically.
+
+Import [drkmd.js](https://github.com/BetaHuhn/drkmd.js) like this:
+
+**HTML**
+```html
+<script src="https://cdn.jsdelivr.net/npm/drkmd-js/dist/drkmd-js.min.js"></script>
+```
+
+> Note: `data-drkmd-attach` is missing because we don't want to attach the default toggle to the page
+
+or
 
 **JavaScript**
 ```js
-new Darkmode().attach()
+import Darkmode from 'drkmd-js'
 ```
 
-**CSS**
-```css
-.theme-dark {
-    /* Styles for dark theme */
-}
+Add HTML elements:
 
-.theme-light {
-    /* Styles for light theme */
-}
+```html
+<button id="myBtn">Click me</button>
+<span id="theme">Current theme:</span>
 ```
 
-> **Note:** The classes will be added to the `body` of your HTML page.
+Then create a new Darkmode instance and use any of the available methods:
+
+```js
+const darkmode = new Darkmode()
+
+const updateValue = () => {
+    document.getElementById('theme').innerText = `Current theme: ${ darkmode.currentTheme() }`
+}
+
+document.getElementById('myBtn').addEventListener('click', () => {
+    darkmode.toggle()
+
+    updateValue()
+})
+
+updateValue()
+```
 
 ## 🌍 Browser compatibility
 
@@ -283,20 +416,20 @@ Issues and PRs are very welcome!
 
 The actual source code of this library is in the `drkmd.js` file in the `src` folder.
 
-Run `yarn build` or `npm run build` to produce a production version of [drkmd.js](https://github.com/BetaHuhn/drkmd.js) in the `dist` folder.
+- run `yarn lint` or `npm run lint` to run eslint.
+- run `yarn dev` or `npm run dev` during development.
+- run `yarn build` or `npm run build` to produce a production version of [drkmd.js](https://github.com/BetaHuhn/drkmd.js) in the `dist` folder.
 
 ## ❔ About
 
-This library was developed by me ([@betahuhn](https://github.com/BetaHuhn)) in my free time. If you want to support me:
+This project was developed by me ([@betahuhn](https://github.com/BetaHuhn)) in my free time. If you want to support me:
 
 [![Donate via PayPal](https://img.shields.io/badge/paypal-donate-009cde.svg)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=394RTSBEEEFEE)
 
-### Credits
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/F1F81S2RK)
 
-The library was inspired by [Darkmode.js](https://github.com/sandoche/Darkmode.js) which is similar, but uses a different approach by directly changing the background color of your page, instead of letting you customize everything via `css variables`.
+## 📄 License
 
-### License
-
-Copyright 2020 Maximilian Schiller
+Copyright 2021 Maximilian Schiller
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
