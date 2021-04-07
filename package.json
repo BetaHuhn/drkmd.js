@@ -28,8 +28,7 @@
     "nightmode"
   ],
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
   "devDependencies": {
     "@betahuhn/config": "^1.0.2",
