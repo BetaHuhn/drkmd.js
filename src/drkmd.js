@@ -7,7 +7,7 @@ export default class Darkmode {
 			bottom: '20px',
 			right: '20px',
 			left: 'unset',
-			attachButton: true,
+			attach: false,
 			buttonLight: '#fff',
 			buttonDark: '#000',
 			events: true,
