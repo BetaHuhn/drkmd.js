@@ -330,6 +330,6 @@ The library was inspired by [Darkmode.js](https://github.com/sandoche/Darkmode.j
 
 ### License
 
-Copyright 2020 Maximilian Schiller
+Copyright 2021 Maximilian Schiller
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
