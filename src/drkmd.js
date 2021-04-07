@@ -73,6 +73,7 @@ export default class Darkmode {
 		const span = document.createElement('span')
 		span.innerHTML = this.options.label
 		div.className = 'drkmd-toggle-button'
+
 		div.setAttribute('title', 'Toggle dark mode')
 		div.setAttribute('aria-label', 'Toggle dark mode')
 		div.setAttribute('aria-checked', 'false')
@@ -80,7 +81,7 @@ export default class Darkmode {
 		div.appendChild(span)
 
 		div.addEventListener('click', () => {
-			this.dark === true ? this.toLight() : this.toDark()
+			this.toggle()
 		})
 
 		document.body.insertBefore(div, document.body.firstChild)
@@ -89,19 +90,23 @@ export default class Darkmode {
 
 	toLight() {
 		if (this.options.events) window.dispatchEvent(new CustomEvent('theme-change', { detail: { to: 'light' } }))
+
 		document.documentElement.setAttribute('data-theme', 'light')
-		this._setStorageValue(false)
 		document.body.classList.remove('theme-dark')
 		document.body.classList.add('theme-light')
+
+		this._setStorageValue(false)
 		this.dark = false
 	}
 
 	toDark() {
 		if (this.options.events) window.dispatchEvent(new CustomEvent('theme-change', { detail: { to: 'dark' } }))
+
 		document.documentElement.setAttribute('data-theme', 'dark')
-		this._setStorageValue(true)
 		document.body.classList.add('theme-dark')
 		document.body.classList.remove('theme-light')
+
+		this._setStorageValue(true)
 		this.dark = true
 	}
 
@@ -119,7 +124,7 @@ export default class Darkmode {
 	}
 
 	_switchThemePrefers() {
-		this._preferedTheme() === true ? this.swichToDark() : this.swichToLight()
+		this._preferedTheme() === true ? this.toDark() : this.toLight()
 	}
 
 	_getStorageValue() {
@@ -150,6 +155,7 @@ export default class Darkmode {
           'href',
           'data:text/css;charset=UTF-8,' + encodeURIComponent(css)
 		)
+
 		document.head.appendChild(linkElement)
 	}
 }
