@@ -2,11 +2,6 @@ export const IS_BROWSER = typeof window !== 'undefined'
 
 export default class Darkmode {
 	constructor(options) {
-		if (!IS_BROWSER) {
-			console.warn('Detected environment without a `window` object')
-			return
-		}
-
 		const defaultOptions = {
 			top: 'unset',
 			bottom: '20px',
@@ -29,15 +24,15 @@ export default class Darkmode {
 		this.dark = false
 
 		if (options.autoMatchOsTheme) {
-			window.matchMedia('(prefers-color-scheme: dark)').addListener((e) => e.matches && this.switchThemePrefers())
-			window.matchMedia('(prefers-color-scheme: light)').addListener((e) => e.matches && this.switchThemePrefers())
+			window.matchMedia('(prefers-color-scheme: dark)').addListener((e) => e.matches && this._switchThemePrefers())
+			window.matchMedia('(prefers-color-scheme: light)').addListener((e) => e.matches && this._switchThemePrefers())
 		}
 
-		const storageValue = this.getStorageValue()
+		const storageValue = this._getStorageValue()
 		if (storageValue !== null) {
 			storageValue === 'true' || storageValue === true ? this.toDark() : this.toLight()
 		} else if (options.autoMatchOsTheme) {
-			this.preferedTheme() ? this.toDark() : this.toLight()
+			this._preferedTheme() ? this.toDark() : this.toLight()
 		} else {
 			options.defaultTheme === 'light' ? this.toLight() : this.toDark()
 		}
@@ -89,13 +84,13 @@ export default class Darkmode {
 		})
 
 		document.body.insertBefore(div, document.body.firstChild)
-		this.addStyle(css)
+		this._addStyle(css)
 	}
 
 	toLight() {
 		if (this.options.events) window.dispatchEvent(new CustomEvent('theme-change', { detail: { to: 'light' } }))
 		document.documentElement.setAttribute('data-theme', 'light')
-		this.setStorageValue(false)
+		this._setStorageValue(false)
 		document.body.classList.remove('theme-dark')
 		document.body.classList.add('theme-light')
 		this.dark = false
@@ -104,37 +99,10 @@ export default class Darkmode {
 	toDark() {
 		if (this.options.events) window.dispatchEvent(new CustomEvent('theme-change', { detail: { to: 'dark' } }))
 		document.documentElement.setAttribute('data-theme', 'dark')
-		this.setStorageValue(true)
+		this._setStorageValue(true)
 		document.body.classList.add('theme-dark')
 		document.body.classList.remove('theme-light')
 		this.dark = true
-	}
-
-	preferedTheme() {
-		return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
-	}
-
-	switchThemePrefers() {
-		this.preferedTheme() === true ? this.swichToDark() : this.swichToLight()
-	}
-
-	getStorageValue() {
-		if (this.options.localStorage && window.localStorage !== null) {
-			return window.localStorage.getItem('darkmode')
-		} else if (this.options.cookie) {
-			const match = document.cookie.match(RegExp('(?:^|;\\s*)darkmode=([^;]*)'))
-			return match ? match[1] : null
-		}
-
-		return null
-	}
-
-	setStorageValue(value) {
-		if (this.options.localStorage && window.localStorage !== null) {
-			window.localStorage.setItem('darkmode', value)
-		} else if (this.options.cookie) {
-			document.cookie = `darkmode=${ value }`
-		}
 	}
 
 	toggle() {
@@ -146,7 +114,34 @@ export default class Darkmode {
 		return this.dark
 	}
 
-	addStyle(css) {
+	_preferedTheme() {
+		return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
+	}
+
+	_switchThemePrefers() {
+		this._preferedTheme() === true ? this.swichToDark() : this.swichToLight()
+	}
+
+	_getStorageValue() {
+		if (this.options.localStorage && window.localStorage !== null) {
+			return window.localStorage.getItem('darkmode')
+		} else if (this.options.cookie) {
+			const match = document.cookie.match(RegExp('(?:^|;\\s*)darkmode=([^;]*)'))
+			return match ? match[1] : null
+		}
+
+		return null
+	}
+
+	_setStorageValue(value) {
+		if (this.options.localStorage && window.localStorage !== null) {
+			window.localStorage.setItem('darkmode', value)
+		} else if (this.options.cookie) {
+			document.cookie = `darkmode=${ value }`
+		}
+	}
+
+	_addStyle(css) {
 		const linkElement = document.createElement('link')
 
 		linkElement.setAttribute('rel', 'stylesheet')

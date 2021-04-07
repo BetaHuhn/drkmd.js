@@ -22,4 +22,6 @@ const detect = () => {
 
 if (IS_BROWSER) {
 	detect()
+} else {
+	console.warn('drkmd.js: Detected environment without a `window` object')
 }
