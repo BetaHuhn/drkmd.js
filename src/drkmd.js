@@ -32,8 +32,8 @@ export default class Darkmode {
 
 		// Listen for prefers-color-scheme change
 		if (options.autoMatchOsTheme) {
-			window.matchMedia('(prefers-color-scheme: dark)').addListener((e) => e.matches && this._switchThemePrefers())
-			window.matchMedia('(prefers-color-scheme: light)').addListener((e) => e.matches && this._switchThemePrefers())
+			window.matchMedia('(prefers-color-scheme: dark)').addListener((e) => e.matches && this._handlePreferedThemeChangeEvent())
+			window.matchMedia('(prefers-color-scheme: light)').addListener((e) => e.matches && this._handlePreferedThemeChangeEvent())
 		}
 
 		// Determine to which theme should be set, start with default, precendence based on descending order
@@ -176,19 +176,39 @@ export default class Darkmode {
 		return this.dark ? 'dark' : 'light'
 	}
 
+
+	/**
+     * Check if the system theme is dark
+     * @private
+	 * @returns {boolean} isDark - true if system theme is dark
+     */
 	_preferedThemeIsDark() {
 		return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
 	}
 
-	_switchThemePrefers() {
+	/**
+	 * Switch the current theme if the prefered system theme changes
+	 * @private
+	 */
+	_handlePreferedThemeChangeEvent() {
 		const val = this._preferedThemeIsDark()
 		this._changeThemeToDark(val)
 	}
 
+	/**
+	 * Change theme to dark if true, else change to light
+	 * @private
+	 * @param {boolean} toDark - change theme to dark
+	 */
 	_changeThemeToDark(toDark) {
 		toDark ? this.toDark() : this.toLight()
 	}
 
+	/**
+	 * Save the current theme choice in either local storage as a cookie
+	 * @private
+	 * @param {boolean} value - true for dark, false for light
+	 */
 	_setStorageValue(value) {
 		if (this.options.localStorage && window.localStorage !== null) {
 			window.localStorage.setItem('darkmode', value)
@@ -201,6 +221,11 @@ export default class Darkmode {
 		}
 	}
 
+	/**
+	 * Add the specified styles as a new stylesheet to the document
+	 * @private
+	 * @param {sring} css - the css which should be added to the document
+	 */
 	_addStyle(css) {
 		const linkElement = document.createElement('link')
 
