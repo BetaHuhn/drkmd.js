@@ -153,15 +153,6 @@ export default class Darkmode {
 	}
 
 	/**
-	 * Check if the darkmode is activated
-	 * @deprecated Use isDark and isLight
-	 * @returns {boolean} isDark - true if theme is dark and false if it is light
-	 */
-	isActivated() {
-		return this.dark
-	}
-
-	/**
 	 * Determine if the current theme is dark
 	 * @returns {boolean} isDark - true if theme is dark and false if it is light
 	 */
