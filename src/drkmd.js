@@ -1,6 +1,11 @@
 export const IS_BROWSER = typeof window !== 'undefined'
 
 export default class Darkmode {
+	/**
+	 * Create new Darkmode instance
+	 * @constructor
+	 * @param {?object} options - object containing options
+	 */
 	constructor(options) {
 		const defaultOptions = {
 			top: 'unset',
@@ -18,26 +23,45 @@ export default class Darkmode {
 			defaultTheme: 'light'
 		}
 
+		// Parse options based on parameters and defaults
 		options = Object.assign({}, defaultOptions, options)
 
+		// Initialize values
 		this.options = options
 		this.dark = false
 
+		// Listen for prefers-color-scheme change
 		if (options.autoMatchOsTheme) {
 			window.matchMedia('(prefers-color-scheme: dark)').addListener((e) => e.matches && this._switchThemePrefers())
 			window.matchMedia('(prefers-color-scheme: light)').addListener((e) => e.matches && this._switchThemePrefers())
 		}
 
-		const storageValue = this._getStorageValue()
-		if (storageValue !== null) {
-			storageValue === 'true' || storageValue === true ? this.toDark() : this.toLight()
-		} else if (options.autoMatchOsTheme) {
-			this._preferedTheme() ? this.toDark() : this.toLight()
-		} else {
-			options.defaultTheme === 'light' ? this.toLight() : this.toDark()
+		// Determine to which theme should be set, start with default, precendence based on descending order
+		let changeToDark = options.defaultTheme !== 'light'
+
+		// First check the system theme
+		if (options.autoMatchOsTheme) {
+			changeToDark = this._preferedThemeIsDark()
 		}
+
+		// Then check if a cookie is set
+		if (this.options.cookie) {
+			const match = document.cookie.match(RegExp('(?:^|;\\s*)darkmode=([^;]*)'))
+			changeToDark = match ? match[1] === 'true' : null
+		}
+
+		// Lastly check local storage
+		if (this.options.localStorage && window.localStorage !== null) {
+			changeToDark = window.localStorage.getItem('darkmode') === 'true'
+		}
+
+		// Change the theme to dark if true or light if false
+		this._changeThemeToDark(changeToDark)
 	}
 
+	/**
+	 * Attach the theme toggle to the page
+	 */
 	attach() {
 		const css = `
             .drkmd-toggle-button{
@@ -71,6 +95,7 @@ export default class Darkmode {
 
 		const div = document.createElement('div')
 		const span = document.createElement('span')
+
 		span.innerHTML = this.options.label
 		div.className = 'drkmd-toggle-button'
 
@@ -78,6 +103,7 @@ export default class Darkmode {
 		div.setAttribute('aria-label', 'Toggle dark mode')
 		div.setAttribute('aria-checked', 'false')
 		div.setAttribute('role', 'checkbox')
+
 		div.appendChild(span)
 
 		div.addEventListener('click', () => {
@@ -88,6 +114,9 @@ export default class Darkmode {
 		this._addStyle(css)
 	}
 
+	/**
+	 * Change the theme to light
+	 */
 	toLight() {
 		if (this.options.events) window.dispatchEvent(new CustomEvent('theme-change', { detail: { to: 'light' } }))
 
@@ -99,6 +128,9 @@ export default class Darkmode {
 		this.dark = false
 	}
 
+	/**
+	 * Change the theme to dark
+	 */
 	toDark() {
 		if (this.options.events) window.dispatchEvent(new CustomEvent('theme-change', { detail: { to: 'dark' } }))
 
@@ -110,39 +142,71 @@ export default class Darkmode {
 		this.dark = true
 	}
 
+	/**
+	 * Toggle between the dark and light theme based on the current one
+	 * @returns {boolean} isDark - true if theme is now dark and false if it is light
+	 */
 	toggle() {
-		this.dark ? this.toLight() : this.toDark()
-		return this.dark
+		const val = !this.dark
+		this._changeThemeToDark(val)
+		return val
 	}
 
+	/**
+	 * Check if the darkmode is activated
+	 * @deprecated Use isDark and isLight
+	 * @returns {boolean} isDark - true if theme is dark and false if it is light
+	 */
 	isActivated() {
 		return this.dark
 	}
 
-	_preferedTheme() {
+	/**
+	 * Determine if the current theme is dark
+	 * @returns {boolean} isDark - true if theme is dark and false if it is light
+	 */
+	isDark() {
+		return this.dark === true
+	}
+
+	/**
+	 * Determine if the current theme is light
+	 * @returns {boolean} isLight - true if theme is light and false if it is dark
+	 */
+	isLight() {
+		return this.dark === false
+	}
+
+	/**
+	 * Return the current theme as a string
+	 * @returns {string} theme - either dark or light
+	 */
+	currentTheme() {
+		return this.dark ? 'dark' : 'light'
+	}
+
+	_preferedThemeIsDark() {
 		return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
 	}
 
 	_switchThemePrefers() {
-		this._preferedTheme() === true ? this.toDark() : this.toLight()
+		const val = this._preferedThemeIsDark()
+		this._changeThemeToDark(val)
 	}
 
-	_getStorageValue() {
-		if (this.options.localStorage && window.localStorage !== null) {
-			return window.localStorage.getItem('darkmode')
-		} else if (this.options.cookie) {
-			const match = document.cookie.match(RegExp('(?:^|;\\s*)darkmode=([^;]*)'))
-			return match ? match[1] : null
-		}
-
-		return null
+	_changeThemeToDark(toDark) {
+		toDark ? this.toDark() : this.toLight()
 	}
 
 	_setStorageValue(value) {
 		if (this.options.localStorage && window.localStorage !== null) {
 			window.localStorage.setItem('darkmode', value)
-		} else if (this.options.cookie) {
+			return
+		}
+
+		if (this.options.cookie) {
 			document.cookie = `darkmode=${ value }`
+			return
 		}
 	}
 
