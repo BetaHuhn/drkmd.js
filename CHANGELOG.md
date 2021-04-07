@@ -1,3 +1,26 @@
+## [v1.0.0] - 2021-04-07
+
+[Release notes](https://github.com/BetaHuhn/drkmd.js/releases/tag/v1.0.0) · [Compare](https://github.com/BetaHuhn/drkmd.js/compare/v0.2.18...v1.0.0) · [Tag](https://github.com/BetaHuhn/drkmd.js/tree/v1.0.0) · Archive ([zip](https://github.com/BetaHuhn/drkmd.js/archive/v1.0.0.zip) · [tar.gz](https://github.com/BetaHuhn/drkmd.js/archive/v1.0.0.tar.gz))
+
+### New features
+
+- [`ef0ffc3`](https://github.com/BetaHuhn/drkmd.js/commit/ef0ffc3)  Detect data attributes
+- [`f305a03`](https://github.com/BetaHuhn/drkmd.js/commit/f305a03)  Use attribute to change theme on click
+
+### Updates
+
+- [`df25c9d`](https://github.com/BetaHuhn/drkmd.js/commit/df25c9d)  Cleanup code
+- [`e8cfd72`](https://github.com/BetaHuhn/drkmd.js/commit/e8cfd72)  Add more comments, reduce complexity
+
+### Dependency updates
+
+- [`9b7e344`](https://github.com/BetaHuhn/drkmd.js/commit/9b7e344)  Update dependencies
+
+### Breaking changes
+
+- [`b42e1fd`](https://github.com/BetaHuhn/drkmd.js/commit/b42e1fd) ♻️ Prepend internal function with _
+- [`4ebce82`](https://github.com/BetaHuhn/drkmd.js/commit/4ebce82)  Remove isActivated method (replaced with isDark/isLight)
+
 ## [v0.2.18] - 2021-04-05
 
 [Release notes](https://github.com/BetaHuhn/drkmd.js/releases/tag/v0.2.18) · [Compare](https://github.com/BetaHuhn/drkmd.js/compare/v0.2.17...v0.2.18) · [Tag](https://github.com/BetaHuhn/drkmd.js/tree/v0.2.18) · Archive ([zip](https://github.com/BetaHuhn/drkmd.js/archive/v0.2.18.zip) · [tar.gz](https://github.com/BetaHuhn/drkmd.js/archive/v0.2.18.tar.gz))
