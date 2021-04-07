@@ -28,7 +28,7 @@ Simple dark-mode/light-mode logic for any website
 
 [drkmd.js](https://github.com/BetaHuhn/drkmd.js) (short for darkmode.js) lets you add a dark-mode/light-mode toggle to any website. The library detects the system theme automatically and even saves the users choice in local storage or as a cookie.
 
-The library will add the class `theme-dark`/`theme-light` to the body of the page and set the attribute `data-theme` to `dark`/`light` on the html tag which can be used to specify different css styles depending on the theme. You can also listen to a `theme-change` event for more advanced use cases. See [usage](https://github.com/BetaHuhn/drkmd.js#usage) below how you can customize your page with this.
+The library will add the class `theme-dark`/`theme-light` to the body of the page and set the attribute `data-theme` to `dark`/`light` on the html tag which can be used to specify different css styles depending on the theme. You can also listen to a `theme-change` event for more advanced use cases. See [usage](#-usage) below how you can customize your page with this.
 
 ## 🚀 Get started
 
@@ -51,9 +51,9 @@ npm install drkmd-js
 Then add the following JavaScript code:
 
 ```javascript
-import Darkmode from 'drkmd-js';
+import Darkmode from 'drkmd-js'
 
-new Darkmode().attach();
+new Darkmode().attach()
 ```
 
 Both methods will add the [darkmode toggle](#default-theme-toggle) with all the default [options](#%EF%B8%8F-options) to your page.
@@ -123,8 +123,8 @@ You can also use `data-drkmd-to-light` and `data-drkmd-to-dark` to switch to a s
 To enable/disable Darkmode you can use the method `toggle()`:
 
 ```javascript
-const darkmode = new Darkmode();
-darkmode.toggle();
+const darkmode = new Darkmode()
+darkmode.toggle()
 ```
 
 There are also other methods available:
@@ -144,18 +144,18 @@ darkmode.isLight() // Returns true if the current theme is light
 By default [drkmd.js](https://github.com/BetaHuhn/drkmd.js) emits a `theme-change` event everytime the theme changes:
 
 ```js
-import Darkmode from 'drkmd-js';
+import Darkmode from 'drkmd-js'
 
-new Darkmode();
+new Darkmode()
 
 window.addEventListener('theme-change', e => {
-    console.log(e.detail.to); // will return 'light' or 'dark'
-});
+    console.log(e.detail.to) // will return 'light' or 'dark'
+})
 ```
 
 This can be turned off by setting the option `events: false`.
 
-The `theme-change` event could be used to change the `src` attribute of an `<img>` tag depending on the theme ([more info](https://github.com/BetaHuhn/drkmd.js/discussions/11#discussioncomment-247341)) or modify the page in any other way with JavaScript when the theme changes.
+The `theme-change` event could be used to change the `src` attribute of an `<img>` tag depending on the theme (example [below](#different-images-depending-on-the-theme)) or modify the page in any other way with JavaScript when the theme changes.
 
 ## ⚙️ Options
 
@@ -267,7 +267,7 @@ Render the darkmode toggle with custom options:
 
 **HTML**
 ```html
-<script src="https://cdn.jsdelivr.net/npm/drkmd-js/dist/drkmd-js.min.js" data-drkmd-options='{ "right": "unset", "left": "32px", "defaultTheme": "dark" }'></script>
+<script src="https://cdn.jsdelivr.net/npm/drkmd-js/dist/drkmd-js.min.js" data-drkmd-opts='{ "right": "unset", "left": "32px", "defaultTheme": "dark" }'></script>
 ```
 
 or
@@ -313,11 +313,15 @@ Then on your custom element add the attribute `data-drkmd-toggle`:
 <span data-drkmd-toggle>Change theme</span>
 ```
 
+When you click that element, the theme will be toggled automatically.
+
+There's also `data-drkmd-to-light` and `data-drkmd-to-dark` which will change the theme to either dark or light specifically.
+
 ---
 
 ### Different images depending on the theme
 
-You can use the `theme-change` event to modify an element with JavaScript. Here we are changing the `src` attribute of an `img` tag when the theme changes:
+You can use the `theme-change` [event](#events) to modify an element with JavaScript. Here we are changing the `src` attribute of an `img` tag when the theme changes:
 
 **HTML**
 ```html

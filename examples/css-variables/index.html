@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Darkmode example</title>
+    <style>
+        /* Light Colors*/
+        .theme-light {
+            --background: #fff;
+            --color: #000;
+        }
+
+        /* Dark Colors */
+        .theme-dark {
+            --background: #000;
+            --color: #fff;
+        }
+
+        html,
+        body {
+            background: var(--background);
+            color: var(--color);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Darkmode example</h1>
+</body>
+
+<script src="https://cdn.jsdelivr.net/npm/drkmd-js/dist/drkmd-js.min.js" data-drkmd-attach ></script>
+
+<!-- or -->
+
+<!--
+<script>
+    import Darkmode from 'drkmd-js'
+    new Darkmode().attach()
+</script>
+-->
+</html>
