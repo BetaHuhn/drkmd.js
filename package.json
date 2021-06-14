@@ -1,6 +1,6 @@
 {
   "name": "drkmd-js",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Simple dark-mode/light-mode toggle for any website",
   "main": "dist/drkmd-js.min.js",
   "scripts": {
