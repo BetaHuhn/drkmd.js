@@ -1,3 +1,11 @@
+## [v1.0.9] - 2021-08-09
+
+[Release notes](https://github.com/BetaHuhn/drkmd.js/releases/tag/v1.0.9) · [Compare](https://github.com/BetaHuhn/drkmd.js/compare/v1.0.8...v1.0.9) · [Tag](https://github.com/BetaHuhn/drkmd.js/tree/v1.0.9) · Archive ([zip](https://github.com/BetaHuhn/drkmd.js/archive/v1.0.9.zip) · [tar.gz](https://github.com/BetaHuhn/drkmd.js/archive/v1.0.9.tar.gz))
+
+### Dependency updates
+
+- [`91f13c5`](https://github.com/BetaHuhn/drkmd.js/commit/91f13c5)  Bump eslint from 7.31.0 to 7.32.0
+
 ## [v1.0.8] - 2021-07-26
 
 [Release notes](https://github.com/BetaHuhn/drkmd.js/releases/tag/v1.0.8) · [Compare](https://github.com/BetaHuhn/drkmd.js/compare/v1.0.7...v1.0.8) · [Tag](https://github.com/BetaHuhn/drkmd.js/tree/v1.0.8) · Archive ([zip](https://github.com/BetaHuhn/drkmd.js/archive/v1.0.8.zip) · [tar.gz](https://github.com/BetaHuhn/drkmd.js/archive/v1.0.8.tar.gz))
