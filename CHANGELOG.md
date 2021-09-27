@@ -1,3 +1,11 @@
+## [v1.0.12] - 2021-09-27
+
+[Release notes](https://github.com/BetaHuhn/drkmd.js/releases/tag/v1.0.12) · [Compare](https://github.com/BetaHuhn/drkmd.js/compare/v1.0.11...v1.0.12) · [Tag](https://github.com/BetaHuhn/drkmd.js/tree/v1.0.12) · Archive ([zip](https://github.com/BetaHuhn/drkmd.js/archive/v1.0.12.zip) · [tar.gz](https://github.com/BetaHuhn/drkmd.js/archive/v1.0.12.tar.gz))
+
+### Dependency updates
+
+- [`cde11ce`](https://github.com/BetaHuhn/drkmd.js/commit/cde11ce)  Bump semver-regex from 3.1.2 to 3.1.3
+
 ## [v1.0.11] - 2021-09-13
 
 [Release notes](https://github.com/BetaHuhn/drkmd.js/releases/tag/v1.0.11) · [Compare](https://github.com/BetaHuhn/drkmd.js/compare/v1.0.10...v1.0.11) · [Tag](https://github.com/BetaHuhn/drkmd.js/tree/v1.0.11) · Archive ([zip](https://github.com/BetaHuhn/drkmd.js/archive/v1.0.11.zip) · [tar.gz](https://github.com/BetaHuhn/drkmd.js/archive/v1.0.11.tar.gz))
